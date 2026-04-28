@@ -31,7 +31,7 @@ export default function Login({ onSwitch }: { onSwitch: () => void }) {
 }
 
 const styles: Record<string, React.CSSProperties> = {
-  container: { maxWidth: 400, margin: "80px auto", padding: 32, border: "1px solid #ddd", borderRadius: 8 },
+  container: { padding: 32 },
   form: { display: "flex", flexDirection: "column", gap: 12 },
   input: { padding: "10px 14px", border: "1px solid #ccc", borderRadius: 6, fontSize: 14 },
   button: { padding: "10px 14px", background: "#1a1a2e", color: "#fff", border: "none", borderRadius: 6, cursor: "pointer", fontSize: 15 },
