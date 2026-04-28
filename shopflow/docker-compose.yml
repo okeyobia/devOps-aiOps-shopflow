@@ -130,6 +130,17 @@ services:
       - shopflow-network
     restart: unless-stopped
 
+  seeder:
+    build:
+      context: ./database
+      dockerfile: Dockerfile.seed
+    container_name: shopflow-seeder
+    depends_on:
+      - product-service
+    networks:
+      - shopflow-network
+    restart: "no"
+
   prometheus:
     image: prom/prometheus:latest
     container_name: shopflow-prometheus

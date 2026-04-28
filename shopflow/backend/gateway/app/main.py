@@ -90,7 +90,7 @@ async def proxy(path: str, request: Request):
     body = await request.body()
     headers = {k: v for k, v in request.headers.items() if k.lower() not in ("host", "content-length")}
 
-    async with httpx.AsyncClient(timeout=30.0) as client:
+    async with httpx.AsyncClient(timeout=30.0, follow_redirects=True) as client:
         resp = await client.request(method=method, url=upstream_url, content=body, headers=headers)
 
     return Response(
