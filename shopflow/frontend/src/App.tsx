@@ -163,7 +163,7 @@ function Sidebar({
 }) {
   return (
     <aside style={styles.sidebar}>
-      <div style={styles.sidebarLogo}>ShopFlow</div>
+      <div style={{ ...styles.sidebarLogo, cursor: "pointer" }} onClick={() => setPage("home")}>ShopFlow</div>
       <nav style={styles.sidebarNav}>
         {NAV_ITEMS.map(({ label, key }) => (
           <button
@@ -444,8 +444,10 @@ const styles: Record<string, React.CSSProperties> = {
   homeHero: {
     background: brand.navy,
     padding: "80px 48px",
+    display: "flex",
+    justifyContent: "center",
   },
-  homeHeroInner: { maxWidth: 560 },
+  homeHeroInner: { maxWidth: 560, textAlign: "center" },
   homeTitle: {
     fontSize: 52, fontWeight: 800, color: brand.white,
     margin: "0 0 20px", lineHeight: 1.1, letterSpacing: "-0.025em",
