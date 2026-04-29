@@ -107,7 +107,7 @@ PRODUCTS = [
         "price": 34.99,
         "category": "Accessories",
         "stock": 90,
-        "image_url": "https://images.unsplash.com/photo-1553062407-98eeb64c6a45?w=400",
+        "image_url": "https://images.unsplash.com/photo-1582418702059-97ebafb35d09?w=400",
     },
     {
         "name": "Cashmere Beanie Hat",

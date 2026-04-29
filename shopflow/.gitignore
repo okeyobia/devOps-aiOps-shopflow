@@ -53,6 +53,7 @@ docker-compose.override.yml
 # Frontend build
 frontend/build/
 frontend/dist/
+frontend/.claude/
 
 # Coverage
 htmlcov/
@@ -62,6 +63,8 @@ coverage.xml
 # Grafana/Prometheus
 *.db
 
+# terraform
+infrastructure/.terraform/
 # Ignore local database init scripts
 /database/init/*.sql
 !database/init/01_create_databases.sql
