@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Products from "./pages/Products";
 import Orders from "./pages/Orders";
+import ProductDetail from "./pages/ProductDetail";
 
 interface Product {
   id: string;
@@ -17,7 +18,7 @@ interface Product {
   image_url: string;
 }
 
-type Page = "home" | "products" | "orders";
+type Page = "home" | "products" | "orders" | "product";
 
 interface CartItem {
   id: string;
@@ -168,7 +169,7 @@ function Sidebar({
         {NAV_ITEMS.map(({ label, key }) => (
           <button
             key={key}
-            style={page === key ? styles.sidebarLinkActive : styles.sidebarLink}
+            style={(page === key || (page === "product" && key === "products")) ? styles.sidebarLinkActive : styles.sidebarLink}
             onClick={() => {
               if (key === "orders" && !isAuthenticated) {
                 onAuthOpen();
@@ -203,10 +204,11 @@ function SkeletonCard() {
 }
 
 function HomePage({
-  onNavigate, onAddToCart,
+  onNavigate, onAddToCart, onViewDetail,
 }: {
   onNavigate: (p: Page) => void;
   onAddToCart: (p: Product) => void;
+  onViewDetail: (p: Product) => void;
 }) {
   const [featured, setFeatured] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -244,7 +246,7 @@ function HomePage({
           {loading
             ? Array.from({ length: 6 }).map((_, i) => <SkeletonCard key={i} />)
             : featured.map(p => (
-                <div key={p.id} style={styles.featuredCard} className="product-card">
+                <div key={p.id} style={{ ...styles.featuredCard, cursor: "pointer" }} className="product-card" onClick={() => onViewDetail(p)}>
                   {p.image_url
                     ? <img src={p.image_url} alt={p.name} style={styles.featuredImage} />
                     : <div style={styles.featuredImagePlaceholder} />}
@@ -257,7 +259,7 @@ function HomePage({
                     <button
                       style={p.stock > 0 ? styles.addBtn : styles.disabledBtn}
                       disabled={p.stock === 0}
-                      onClick={() => onAddToCart(p)}
+                      onClick={e => { e.stopPropagation(); onAddToCart(p); }}
                     >
                       {p.stock > 0 ? "Add to Cart" : "Out of Stock"}
                     </button>
@@ -273,9 +275,12 @@ function HomePage({
 function AppContent() {
   const { isAuthenticated, logout } = useAuth();
   const [page, setPage] = useState<Page>("home");
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [cart, setCart] = useState<CartItem[]>([]);
   const [showCart, setShowCart] = useState(false);
   const [showAuth, setShowAuth] = useState(false);
+
+  const viewDetail = (p: Product) => { setSelectedProduct(p); setPage("product"); };
 
   const addToCart = (product: { id: string; name: string; price: number }) => {
     setCart(prev => {
@@ -316,9 +321,12 @@ function AppContent() {
           onAuthOpen={() => setShowAuth(true)}
         />
         <main style={styles.main}>
-          {page === "home" ? <HomePage onNavigate={setPage} onAddToCart={addToCart} /> : null}
-          {page === "products" ? <Products onAddToCart={addToCart} /> : null}
+          {page === "home" ? <HomePage onNavigate={setPage} onAddToCart={addToCart} onViewDetail={viewDetail} /> : null}
+          {page === "products" ? <Products onAddToCart={addToCart} onViewDetail={viewDetail} /> : null}
           {page === "orders" && isAuthenticated ? <Orders /> : null}
+          {page === "product" && selectedProduct ? (
+            <ProductDetail product={selectedProduct} onBack={() => setPage("products")} onAddToCart={addToCart} />
+          ) : null}
         </main>
       </div>
 
