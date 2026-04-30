@@ -23,8 +23,8 @@ jobs:
       product-service: ${{ steps.filter.outputs.product-service }}
       user-service:    ${{ steps.filter.outputs.user-service }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: dorny/paths-filter@v3
+      - uses: actions/checkout@v5
+      - uses: dorny/paths-filter@v4
         id: filter
         with:
           filters: |
