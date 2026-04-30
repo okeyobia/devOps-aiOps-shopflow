@@ -60,27 +60,27 @@ jobs:
           - service: frontend
             context: shopflow/frontend
             manifest: gitops/k8s/frontend/frontend.yaml
-            changed: ${{ needs.changes.outputs.frontend }}
+            changed: ${{ needs.changes.outputs.frontend == 'true' }}
           - service: auth
             context: shopflow/backend/auth
             manifest: gitops/k8s/backend/auth.yaml
-            changed: ${{ needs.changes.outputs.auth }}
+            changed: ${{ needs.changes.outputs.frontend == 'true' || needs.changes.outputs.auth == 'true' }}
           - service: gateway
             context: shopflow/backend/gateway
             manifest: gitops/k8s/backend/gateway.yaml
-            changed: ${{ needs.changes.outputs.gateway }}
+            changed: ${{ needs.changes.outputs.frontend == 'true' || needs.changes.outputs.gateway == 'true' }}
           - service: order-service
             context: shopflow/backend/order-service
             manifest: gitops/k8s/backend/order-service.yaml
-            changed: ${{ needs.changes.outputs.order-service }}
+            changed: ${{ needs.changes.outputs.frontend == 'true' || needs.changes.outputs.order-service == 'true' }}
           - service: product-service
             context: shopflow/backend/product-service
             manifest: gitops/k8s/backend/product-service.yaml
-            changed: ${{ needs.changes.outputs.product-service }}
+            changed: ${{ needs.changes.outputs.frontend == 'true' || needs.changes.outputs.product-service == 'true' }}
           - service: user-service
             context: shopflow/backend/user-service
             manifest: gitops/k8s/backend/user-service.yaml
-            changed: ${{ needs.changes.outputs.user-service }}
+            changed: ${{ needs.changes.outputs.frontend == 'true' || needs.changes.outputs.user-service == 'true' }}
 
     steps:
       - name: Skip unchanged service
