@@ -59,27 +59,27 @@ jobs:
         include:
           - service: frontend
             context: shopflow/frontend
-            manifest: shopflow/gitops/k8s/frontend/frontend.yaml
+            manifest: gitops/k8s/frontend/frontend.yaml
             changed: ${{ needs.changes.outputs.frontend }}
           - service: auth
             context: shopflow/backend/auth
-            manifest: shopflow/gitops/k8s/backend/auth.yaml
+            manifest: gitops/k8s/backend/auth.yaml
             changed: ${{ needs.changes.outputs.auth }}
           - service: gateway
             context: shopflow/backend/gateway
-            manifest: shopflow/gitops/k8s/backend/gateway.yaml
+            manifest: gitops/k8s/backend/gateway.yaml
             changed: ${{ needs.changes.outputs.gateway }}
           - service: order-service
             context: shopflow/backend/order-service
-            manifest: shopflow/gitops/k8s/backend/order-service.yaml
+            manifest: gitops/k8s/backend/order-service.yaml
             changed: ${{ needs.changes.outputs.order-service }}
           - service: product-service
             context: shopflow/backend/product-service
-            manifest: shopflow/gitops/k8s/backend/product-service.yaml
+            manifest: gitops/k8s/backend/product-service.yaml
             changed: ${{ needs.changes.outputs.product-service }}
           - service: user-service
             context: shopflow/backend/user-service
-            manifest: shopflow/gitops/k8s/backend/user-service.yaml
+            manifest: gitops/k8s/backend/user-service.yaml
             changed: ${{ needs.changes.outputs.user-service }}
 
     steps:
@@ -167,7 +167,7 @@ jobs:
             --name   ${{ env.EKS_CLUSTER }}
 
       - name: Deploy via Kustomize
-        run: kubectl apply -k shopflow/gitops/
+        run: kubectl apply -k gitops/
 
       - name: Wait for rollout
         run: |
