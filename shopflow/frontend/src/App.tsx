@@ -297,7 +297,7 @@ function AppContent() {
       setShowCart(false);
       setShowAuth(true);
     } else {
-      alert("Checkout flow coming soon!");
+      alert("Checkout flow coming with stripe integration!");
     }
   };
 
