@@ -16,6 +16,7 @@ dist/
 
 # Agents
 .agents/
+.mcp.json
 
 # Node
 node_modules/
