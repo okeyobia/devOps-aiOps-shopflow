@@ -40,10 +40,10 @@ docker-compose.override.yml
 # Env files
 
 # Terraform state
-infrastructure/terraform.tfstate
-infrastructure/terraform.tfstate.backup
-*.tfstate
 *.tfstate.backup
+*.tfstate
+*.tfstate.*
+.terraform/
 .env.*
 
 # Jupyter
@@ -60,7 +60,7 @@ infrastructure/terraform.tfstate.backup
 # Frontend build
 frontend/build/
 frontend/dist/
-frontend/.claude/
+shopflow/frontend/.claude/
 
 # Coverage
 htmlcov/
@@ -71,7 +71,7 @@ coverage.xml
 *.db
 
 # terraform
-infrastructure/.terraform/
+shopflow/infrastructure/.terraform/
 # Ignore local database init scripts
 /database/init/*.sql
 !database/init/01_create_databases.sql
