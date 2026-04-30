@@ -38,6 +38,12 @@ Thumbs.db
 docker-compose.override.yml
 
 # Env files
+
+# Terraform state
+infrastructure/terraform.tfstate
+infrastructure/terraform.tfstate.backup
+*.tfstate
+*.tfstate.backup
 .env.*
 
 # Jupyter
