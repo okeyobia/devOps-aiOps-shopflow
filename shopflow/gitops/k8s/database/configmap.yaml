@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: shopflow-config
+  namespace: shopflow
+data:
+  DATABASE_HOST: postgres
+  DATABASE_PORT: "5432"
+  AUTH_SERVICE_URL: "http://auth:3002"
+  USER_SERVICE_URL: "http://user-service:3003"
+  PRODUCT_SERVICE_URL: "http://product-service:3004"
+  ORDER_SERVICE_URL: "http://order-service:3005"
