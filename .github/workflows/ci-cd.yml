@@ -131,15 +131,15 @@ jobs:
           sed -i "s|image: .*shopflow/${{ matrix.service }}:.*|image: ${ACCOUNT}.dkr.ecr.$AWS_REGION.amazonaws.com/shopflow/${{ matrix.service }}:${SHORT_SHA}|g" \
             ${{ matrix.manifest }}
 
-      - name: Commit updated manifest
-        if: matrix.changed == 'true' && github.event_name == 'push'
-        run: |
-          SHORT_SHA=${GITHUB_SHA::8}
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git add ${{ matrix.manifest }}
-          git diff --staged --quiet || git commit -m "ci: update ${{ matrix.service }} image to ${SHORT_SHA}"
-          git push
+      # - name: Commit updated manifest (if not using Argo CD Image Updater)
+      #   if: matrix.changed == 'true' && github.event_name == 'push'
+      #   run: |
+      #     SHORT_SHA=${GITHUB_SHA::8}
+      #     git config user.name "github-actions"
+      #     git config user.email "github-actions@github.com"
+      #     git add ${{ matrix.manifest }}
+      #     git diff --staged --quiet || git commit -m "ci: update ${{ matrix.service }} image to ${SHORT_SHA}"
+      #     git push
 
   # ── Deploy to EKS ─────────────────────────────────────────────────────────
   deploy:
