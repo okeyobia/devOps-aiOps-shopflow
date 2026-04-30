@@ -24,14 +24,14 @@ spec:
                 secretKeyRef:
                   name: shopflow-secrets
                   key: AUTH_DB_URL
-            - name: SECRET_KEY
+            - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:
                   name: shopflow-secrets
                   key: SECRET_KEY
           readinessProbe:
             httpGet:
-              path: /health
+              path: /auth/health
               port: 3002
             initialDelaySeconds: 10
             periodSeconds: 5

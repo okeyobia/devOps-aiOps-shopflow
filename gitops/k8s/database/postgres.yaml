@@ -50,6 +50,8 @@ spec:
                   key: POSTGRES_DB
             - name: POSTGRES_MULTIPLE_DATABASES
               value: "auth_db,users_db,products_db,orders_db"
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
           volumeMounts:
             - name: postgres-data
               mountPath: /var/lib/postgresql/data

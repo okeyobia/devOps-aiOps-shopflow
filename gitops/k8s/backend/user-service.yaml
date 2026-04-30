@@ -17,7 +17,7 @@ spec:
         - name: user-service
           image: 430367037730.dkr.ecr.us-east-2.amazonaws.com/shopflow/user-service:latest
           ports:
-            - containerPort: 3003
+            - containerPort: 3005
           env:
             - name: DATABASE_URL
               valueFrom:
@@ -26,8 +26,8 @@ spec:
                   key: USERS_DB_URL
           readinessProbe:
             httpGet:
-              path: /health
-              port: 3003
+              path: /users/health
+              port: 3005
             initialDelaySeconds: 10
             periodSeconds: 5
           resources:
@@ -48,6 +48,6 @@ spec:
     app: user-service
   ports:
     - protocol: TCP
-      port: 3003
-      targetPort: 3003
+      port: 3005
+      targetPort: 3005
   type: ClusterIP
