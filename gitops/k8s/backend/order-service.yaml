@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: order-service
-          image: 430367037730.dkr.ecr.us-east-2.amazonaws.com/shopflow/order-service:latest
+          image: 430367037730.dkr.ecr.us-east-2.amazonaws.com/shopflow/order-service:fa89aee610be7b36db2395e8f26dad3fbe637197
           ports:
             - containerPort: 3004
           env:
